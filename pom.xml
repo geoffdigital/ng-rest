@@ -10,6 +10,7 @@
 	<url>http://maven.apache.org</url>
 	
 	<properties>
+		<jackson.version>2.4.3</jackson.version>
 		<spring.version>3.2.11.RELEASE</spring.version>
 	</properties>
 
@@ -19,6 +20,21 @@
 			<artifactId>h2</artifactId>
 			<version>1.4.181</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
+			<version>0.8.1</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-dbcp</groupId>

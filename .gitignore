@@ -3,3 +3,4 @@
 src/webapp/WEB-INF/classes/*
 src/webapp/WEB-INF/lib/*
 target/*
+/bin/

@@ -36,8 +36,8 @@ public class RestDataFixture {
 		return student;
 	}
 
-	public static StudentDetails customKeyStudentDetails(UUID key) {
-		StudentDetails studentDetails = new StudentDetails(key);
+	public static StudentDetails customIdStudentDetails(UUID id) {
+		StudentDetails studentDetails = new StudentDetails(id);
 
 		studentDetails.setFirstName(FIRST_NAME);
 		studentDetails.setLastName(LAST_NAME);
@@ -48,7 +48,7 @@ public class RestDataFixture {
 	}
 	
 	public static StudentDetails standardStudentDetails() {
-		return customKeyStudentDetails(UUID.randomUUID());
+		return customIdStudentDetails(UUID.randomUUID());
 	}
 
 	public static String standardStudentJSON() {

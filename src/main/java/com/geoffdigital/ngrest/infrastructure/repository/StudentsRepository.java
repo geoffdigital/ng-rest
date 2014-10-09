@@ -5,14 +5,14 @@ import java.util.UUID;
 
 import com.geoffdigital.ngrest.domain.model.Student;
 
-//TODO, make this event based again, with persistence integration events.
 public interface StudentsRepository {
 
-  Student save(Student order);
+  Student save(Student student);
 
-  void delete(UUID key);
+  void delete(UUID id);
 
-  Student findById(UUID key);
+  Student findById(UUID id);
 
   List<Student> findAll();
+  
 }

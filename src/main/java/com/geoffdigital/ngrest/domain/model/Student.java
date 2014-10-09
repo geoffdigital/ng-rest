@@ -1,11 +1,14 @@
-package com.geoffdigital.ngrest.domain.model
-;
+package com.geoffdigital.ngrest.domain.model;
 
 import java.util.UUID;
 
+import org.springframework.beans.BeanUtils;
+
+import com.geoffdigital.ngrest.domain.events.students.StudentDetails;
+
 public class Student {
 	
-	private final UUID id;
+	private UUID id;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -17,6 +20,22 @@ public class Student {
 	
 	public boolean canBeDeleted() {
 	    return true;
+	}
+	
+	public StudentDetails toStudentDetails() {
+		StudentDetails details = new StudentDetails();
+
+	    BeanUtils.copyProperties(this, details);
+
+	    return details;
+	}
+
+	public static Student fromStudentDetails(StudentDetails studentDetails) {
+	    Student student = new Student();
+
+	    BeanUtils.copyProperties(studentDetails, student);
+
+	    return student;
 	}
 	
 	public UUID getId() {

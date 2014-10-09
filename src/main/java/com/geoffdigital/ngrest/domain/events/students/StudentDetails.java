@@ -17,7 +17,7 @@ public class StudentDetails {
   public StudentDetails(UUID id) {
     this.id = id;
   }
-
+  
   public void setId(UUID id) {
     this.id = id;
   }

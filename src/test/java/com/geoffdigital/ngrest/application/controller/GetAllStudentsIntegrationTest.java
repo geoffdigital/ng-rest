@@ -1,5 +1,6 @@
 package com.geoffdigital.ngrest.application.controller;
 
+import static com.geoffdigital.ngrest.application.controller.fixture.RestDataFixture.allStudents;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -16,6 +17,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.geoffdigital.ngrest.application.controller.fixture.RestDataFixture;
 import com.geoffdigital.ngrest.application.services.StudentService;
 import com.geoffdigital.ngrest.domain.events.students.RequestAllStudentsEvent;
 
@@ -42,11 +44,11 @@ public class GetAllStudentsIntegrationTest {
 	@Test
 	public void thatGetStudentsRendersAsJson() throws Exception {
 		this.mockMvc.perform(
-				get("/aggregators/students")
+				get("/students")
 					.accept(MediaType.APPLICATION_JSON))
 					.andDo(print())
 					.andExpect(status().isOk())
-					.andExpect(jsonPath("$[0].items['" + RestDataFixture.YUMMY_ITEM + "']").value(12));
+					.andExpect(jsonPath("$[0].items['" + RestDataFixture.FIRST_NAME + "']").value(12));
 	}
 	
 }

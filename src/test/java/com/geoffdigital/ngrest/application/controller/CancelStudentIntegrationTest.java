@@ -1,7 +1,11 @@
 package com.geoffdigital.ngrest.application.controller;
 
+import static com.geoffdigital.ngrest.application.controller.fixture.RestEventFixtures.studentDeleted;
+import static com.geoffdigital.ngrest.application.controller.fixture.RestEventFixtures.studentDeletedFailed;
+import static com.geoffdigital.ngrest.application.controller.fixture.RestEventFixtures.studentDeletedNotFound;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.argThat;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -44,7 +48,6 @@ public class CancelStudentIntegrationTest {
 				.setMessageConverters(new MappingJackson2HttpMessageConverter()).build();
 	}
 
-	// {!begin thatDeleteStudentUsesHttpOkOnSuccess}
 	@Test
 	public void thatDeleteStudentUsesHttpOkOnSuccess() throws Exception {
 
@@ -53,16 +56,15 @@ public class CancelStudentIntegrationTest {
 					studentDeleted(id));
 
 		this.mockMvc.perform(
-				delete("/aggregators/students/{id}", id.toString())
+				delete("/students/{id}", id.toString())
 					.accept(MediaType.APPLICATION_JSON))
 					.andDo(print())
 					.andExpect(status().isOk());
 
 		verify(studentService).deleteStudent(argThat(
 				Matchers.<DeleteStudentEvent>hasProperty("id",
-						Matchers.equalTo(id))));
+						eq(id))));
 	}
-	// {!end thatDeleteStudentUsesHttpOkOnSuccess}
 
 	@Test
 	public void thatDeleteStudentUsesHttpNotFoundOnEntityLookupFailure() throws Exception {
@@ -72,7 +74,7 @@ public class CancelStudentIntegrationTest {
 					studentDeletedNotFound(id));
 
 		this.mockMvc.perform(
-				delete("/aggregators/students/{id}", id.toString())
+				delete("/students/{id}", id.toString())
 					.accept(MediaType.APPLICATION_JSON))
 					.andDo(print())
 					.andExpect(status().isNotFound());
@@ -86,7 +88,7 @@ public class CancelStudentIntegrationTest {
 					studentDeletedFailed(id));
 
 		this.mockMvc.perform(
-				delete("/aggregators/students/{id}", id.toString())
+				delete("/students/{id}", id.toString())
 					.accept(MediaType.APPLICATION_JSON))
 					.andDo(print())
 					.andExpect(status().isForbidden());

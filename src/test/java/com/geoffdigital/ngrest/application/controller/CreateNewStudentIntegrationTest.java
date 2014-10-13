@@ -1,5 +1,7 @@
 package com.geoffdigital.ngrest.application.controller;
 
+import static com.geoffdigital.ngrest.application.controller.fixture.RestDataFixture.standardStudentJSON;
+import static com.geoffdigital.ngrest.application.controller.fixture.RestEventFixtures.studentCreated;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -45,12 +47,10 @@ public class CreateNewStudentIntegrationTest {
 				studentCreated(UUID.fromString("f3512d26-72f6-4290-9265-63ad69eccc13")));
 	}
 
-	//createStudent - validation?
-
 	@Test
 	public void thatCreateStudentUsesHttpCreated() throws Exception {
 		this.mockMvc.perform(
-				post("/aggregators/students")
+				post("/students")
 					.content(standardStudentJSON())
 					.contentType(MediaType.APPLICATION_JSON)
 					.accept(MediaType.APPLICATION_JSON))
@@ -61,22 +61,22 @@ public class CreateNewStudentIntegrationTest {
 	@Test
 	public void thatCreateStudentRendersAsJson() throws Exception {
 		this.mockMvc.perform(
-				post("/aggregators/students")
+				post("/students")
 					.content(standardStudentJSON())
 					.contentType(MediaType.APPLICATION_JSON)
 					.accept(MediaType.APPLICATION_JSON))
-					.andExpect(jsonPath("$.items['" + YUMMY_ITEM + "']").value(12))
+					//.andExpect(jsonPath("$.items['" + YUMMY_ITEM + "']").value(12))
 					.andExpect(jsonPath("$.id").value("f3512d26-72f6-4290-9265-63ad69eccc13"));
 	}
 
 	@Test
 	public void thatCreateStudentPassesLocationHeader() throws Exception {
 		this.mockMvc.perform(
-				post("/aggregators/students")
+				post("/students")
 					.content(standardStudentJSON())
 					.contentType(MediaType.APPLICATION_JSON)
 					.accept(MediaType.APPLICATION_JSON))
-					.andExpect(header().string("Location", Matchers.endsWith("/aggregators/students/f3512d26-72f6-4290-9265-63ad69eccc13")));
+					.andExpect(header().string("Location", Matchers.endsWith("/students/f3512d26-72f6-4290-9265-63ad69eccc13")));
 	}
 	
 }

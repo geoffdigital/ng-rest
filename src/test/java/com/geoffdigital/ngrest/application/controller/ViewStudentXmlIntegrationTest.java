@@ -1,5 +1,6 @@
 package com.geoffdigital.ngrest.application.controller;
 
+import static com.geoffdigital.ngrest.application.controller.fixture.RestEventFixtures.studentDetailsEvent;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -52,7 +53,7 @@ public class ViewStudentXmlIntegrationTest {
 				studentDetailsEvent(id));
 
 		this.mockMvc.perform(
-				get("/aggregators/students/{id}", id.toString())
+				get("/students/{id}", id.toString())
 					.accept(MediaType.TEXT_XML))
 					.andDo(print())
 					.andExpect(content().contentType(MediaType.TEXT_XML))
@@ -64,10 +65,8 @@ public class ViewStudentXmlIntegrationTest {
 		when(studentService.requestStudentDetails(any(RequestStudentDetailsEvent.class))).thenReturn(
 				studentDetailsEvent(id));
 
-		//TODOCUMENT JSON Path in use here (really like this)
-
 		this.mockMvc.perform(
-				get("/aggregators/students/{id}", id.toString())
+				get("/students/{id}", id.toString())
 					.accept(MediaType.APPLICATION_JSON))
 					.andDo(print())
 					.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
